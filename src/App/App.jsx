@@ -8,24 +8,22 @@ import {
 } from 'react-router-dom';
 import Header from '../components/Header';
 import ListContainer from '../components/ListContainer';
+import { SearchBarContextProvider } from '../context/searchBarContext';
 
 function App() {
   return (
-	<>
-		<Router>
-			<Header />
-			<Switch>
-				<Route
-					exact
-					path="/"
-				>
-					{/* <section className="lumx-spacing-padding-horizontal-huge" /> */}
-					<ListContainer/>
-				</Route>
-			</Switch>
-		</Router>
-
-	</>
+    <>
+      <Router>
+        <SearchBarContextProvider>
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <ListContainer />
+            </Route>
+          </Switch>
+        </SearchBarContextProvider>
+      </Router>
+    </>
   );
 }
 
