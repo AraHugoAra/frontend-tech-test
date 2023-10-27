@@ -1,5 +1,3 @@
-const calculatePageNumber = (totalResults, resultsParPage) => {
-    return Math.ceil(totalResults / resultsParPage)
-}
+const calculatePageNumber = (totalResults, resultsParPage) => Math.ceil(totalResults / resultsParPage);
 
- export default calculatePageNumber
+export default calculatePageNumber;
