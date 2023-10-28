@@ -1,4 +1,4 @@
-const debounce = (cb, delay = 250) => {
+const debounce = (cb: Function, delay = 250) => {
   /* 
     This function adds a delay on a specified action/callback.
       Args:
@@ -7,9 +7,9 @@ const debounce = (cb, delay = 250) => {
       Returns:
           Delayed function in a timeout
    */
-    let timeout
+    let timeout: ReturnType<typeof setTimeout>
 
-    return (...args) => {
+    return (...args: Parameters<() => void>) => {
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             cb(...args)

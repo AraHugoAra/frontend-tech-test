@@ -2,15 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import calculatePageNumber from "../../api/calculatePageNumber";
 import CharacterCard from "../CharacterCard";
-import placeholder from "../../api/placeholder";
 import Pagination from "../Pagination";
-import { SearchBarContext } from "../../context/searchBarContext";
+import { SearchBarContext, SearchBarContextStateType } from "../../context/searchBarContext";
+import { CharacterType } from '../../api/types'
 
 const ListContainer = () => {
-  const { searchText } = useContext(SearchBarContext)
+  const { searchText }: SearchBarContextStateType = useContext(SearchBarContext)
 
   // USE OF THE API
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const resultsPerPage = 4;
   const offset = (currentPage - 1) * resultsPerPage;
   const { data, loading, error } = useFetch(
@@ -29,8 +29,6 @@ const ListContainer = () => {
       //Resets current page after every new name query
       setCurrentPage(1)
     }, [searchText])
-
-  // // USE OF THE PLACEHOLDER -> fold these lines
   // const data = placeholder;
   // const loading = false;
   // const error = null;
@@ -49,8 +47,7 @@ const ListContainer = () => {
     <div className="list-page">
       <div className="list-container">
         {data?.response?.data?.data.results
-          // .slice(firstIndex, lastIndex) //Only when using placeholder
-          .map((item, index) => (
+          .map((item: CharacterType, index: number) => (
             <CharacterCard key={item.id ?? index} character={item} /> //id is optionnal in database so index has been added to prevent key's absence
           ))}
         {pagesNumber > 1 && (

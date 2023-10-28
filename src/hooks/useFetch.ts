@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
-const useFetch = (endpoint, params = {}, dependencies = []) => {
+const useFetch = (endpoint: string, params: {method?: string, body?: JSON | string} = {}, dependencies: Array<number | string> = []) => {
   /* 
     This hook encapsulates a fetch query and returns a loading state, errors caught and response of said query.
       Args:
@@ -13,9 +13,9 @@ const useFetch = (endpoint, params = {}, dependencies = []) => {
           error (object): error caught in the try/catch statement
           data ({status: int, response: object}): status of the query and response of the server
    */
-  const [ data, setData ] = useState(null);
-  const [ error, setError ] = useState(null)
-  const [ loading, setLoading ] = useState(true)
+  const [ data, setData ] = useState<{status: number, response: AxiosResponse} | null>(null);
+  const [ error, setError ] = useState<AxiosError | unknown>(null)
+  const [ loading, setLoading ] = useState<boolean>(true)
 
   const APIBaseUrl = "http://gateway.marvel.com/v1/public";
   const APIKeyParameter = process.env.REACT_APP_MARVEL_API_KEY;
@@ -38,7 +38,7 @@ const useFetch = (endpoint, params = {}, dependencies = []) => {
             setData({status: response.status, response})
             setLoading(false)
         }
-        catch (error) {
+        catch (error: AxiosError | unknown) {
             setError(error)
             setLoading(false)
         }

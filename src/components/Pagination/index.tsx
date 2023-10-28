@@ -4,6 +4,15 @@ import { Icon, Size } from "@lumx/react";
 import { mdiChevronRight } from "@mdi/js";
 import { mdiChevronLeft } from "@mdi/js";
 
+interface PaginationPropsType {
+  firstIndex: number
+  lastIndex: number
+  resultsPerPage: number
+  pagesNumber: number
+  currentPage: number
+  setCurrentPage: Function
+}
+
 const Pagination = ({
   firstIndex,
   lastIndex,
@@ -11,7 +20,7 @@ const Pagination = ({
   pagesNumber,
   currentPage,
   setCurrentPage,
-}) => {
+}: PaginationPropsType) => {
   const handleClickPrev = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -22,7 +31,7 @@ const Pagination = ({
       setCurrentPage(currentPage + 1);
     }
   };
-  const handleClickNumber = (number) => {
+  const handleClickNumber = (number: number) => {
     currentPage !== number && setCurrentPage(number);
   };
 
