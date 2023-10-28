@@ -18,10 +18,15 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "sass": "^1.69.4"
+    "@types/react-router-dom": "^5.3.3",
+    "concurrently": "^8.2.2",
+    "sass": "^1.69.4",
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
+    "watch": "tsc --watch",
+    "start-conc": "concurrently \"yarn:start\" \"yarn:watch\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
