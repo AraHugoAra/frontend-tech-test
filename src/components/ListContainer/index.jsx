@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import calculatePageNumber from "../../api/calculatePageNumber";
 import CharacterCard from "../CharacterCard";
@@ -24,6 +24,11 @@ const ListContainer = () => {
     data?.response?.data?.data?.total,
     resultsPerPage
   );
+
+    useEffect(() => {
+      //Resets current page after every new name query
+      setCurrentPage(1)
+    }, [searchText])
 
   // // USE OF THE PLACEHOLDER -> fold these lines
   // const data = placeholder;
@@ -61,7 +66,9 @@ const ListContainer = () => {
       </div>
     </div>
   ) : (
-    <p>Loading...</p> //TO DO: Switch to a real loading component
+    <div className="list-container">
+      <span className="loader"></span>
+    </div>
   );
 };
 
