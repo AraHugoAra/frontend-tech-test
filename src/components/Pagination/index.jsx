@@ -30,12 +30,24 @@ const Pagination = ({
   const isLastThreePages =
     lastIndex > pagesNumber * resultsPerPage - (3 * resultsPerPage);
 
-  const numbersToDisplay = () => {
-    if (isFirstThreePages) return [2, 3, 4]
-    else if (isLastThreePages) return [pagesNumber -3, pagesNumber - 2, pagesNumber - 1]
+    const numbersToDisplay = () => {
+    if (isFirstThreePages) {
+      let numbersArray = []
+      for(let i=2; i<pagesNumber; i++){
+        numbersArray.length < 4 && numbersArray.push(i)
+      }
+      return numbersArray
+    }
+    else if (isLastThreePages) {
+      let numbersArray = []
+      for(let i=pagesNumber; i>1; i--){
+        i < pagesNumber && numbersArray.length < 4 && numbersArray.push(i)
+      }
+      return numbersArray.reverse()
+    }
     else return [currentPage -1, currentPage, currentPage +1]
 }
-
+  
   return (
     <ul className="pagination">
       <li className="pagination__button" onClick={handleClickPrev}>
@@ -46,7 +58,7 @@ const Pagination = ({
         value={1}
         onClick={() => handleClickNumber(1)}
       />
-      {!isFirstThreePages && (
+      {!isFirstThreePages && pagesNumber > 6 &&  (
         <PaginationNumber isActive={false} value={"..."} onClick={null} />
       )}
       {numbersToDisplay().map((number) => {
@@ -59,7 +71,7 @@ const Pagination = ({
             />
         )
       })}
-      {!isLastThreePages && (
+      {!isLastThreePages && pagesNumber > 6 && (
         <PaginationNumber isActive={false} value={"..."} onClick={null} />
       )}
       <PaginationNumber

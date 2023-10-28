@@ -10,7 +10,6 @@ const PaginationNumber = ({value, isActive, onClick}) => {
             className={className()}
             onClick={() => {
                 onClick()
-                console.log(value)
             }}
         >
             {value}
