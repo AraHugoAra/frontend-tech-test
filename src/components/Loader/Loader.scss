@@ -15,7 +15,7 @@
     height: 48px;
     border-radius: 50%;
     position: absolute;
-    left: 50%;
+    left: calc(50% - 24px); //total width MINUS half loader's width
     top: 50%;
     animation: rotate 1s linear infinite
   }

@@ -5,13 +5,22 @@
     display: flex;
     flex-flow: row nowrap;
     gap: $medium-gap;
+    @include mobile-only {
+        flex-flow: column nowrap;
+        align-items: center;
+        border: none;
+        border-bottom: $border-width-and-shape lumx-color-variant('primary', 'L1');
+    }
     &__image-container {
         // min-width: 250px;
-        width: calc(33% - ($medium-gap / 2)); // 1/3 of container width MINUS half flex gap
+        width: calc(33% - ($medium-gap / 2)); // 1/3 of container's width MINUS half flex gap
         max-width: 250px;
         max-height: 250px;
         overflow: hidden;
         display: flex;
+        @include mobile-only {
+            width: 100%;
+        }
         & > img {
             width: 100%;
             margin: auto;
@@ -21,7 +30,12 @@
         display: flex;
         flex-flow: column nowrap;
         gap: $medium-gap;
-        width: calc(66% - ($medium-gap / 2)); // 3/3 of container width MINUS half flex gap
+        width: calc(66% - ($medium-gap / 2)); // 2/3 of container's width MINUS half flex gap
+        @include mobile-only {
+            width: 100%;
+            align-items: center;
+            text-align: justify;
+        }
         &--numbers-section {
             display: inline-flex;
             gap: $medium-gap;
@@ -32,6 +46,10 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            @include mobile-only {
+                text-align: center;
+                width: 100%;
+            }
         }
         & > p {
             overflow: hidden;
@@ -39,6 +57,9 @@
             -webkit-line-clamp: 7;
             -webkit-box-orient: vertical;
             //TO DO: see more button
+            @include mobile-only {
+                -webkit-line-clamp: 12;
+            }
         }
     }
 }

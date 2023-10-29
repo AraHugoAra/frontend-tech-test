@@ -15,6 +15,7 @@ code {
 }
 
 @import './App/variables.scss';
+@import './App/mixins.scss';
 @import './App/App.scss';
 @import './components/ListContainer/index.scss';
 @import './components/Loader/Loader.scss';

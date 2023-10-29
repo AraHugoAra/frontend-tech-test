@@ -11,4 +11,9 @@
     display: flex;
     flex-flow: column nowrap;
     gap: $big-gap;
+    @include mobile-only {
+        width: 100%;
+        gap: $medium-gap;
+        padding: $medium-gap 0;
+    }
 }
