@@ -15,8 +15,10 @@ const ListContainer = () => {
     useContext(SearchBarContext);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
+
   const resultsPerPage = 4;
   const offset = (currentPage - 1) * resultsPerPage;
+
   const { data, loading, error } = useFetch(
     `/characters?${
       searchText ? `nameStartsWith=${searchText}&` : ""
@@ -24,6 +26,7 @@ const ListContainer = () => {
     {},
     [currentPage, searchText]
   );
+
   const lastIndex = currentPage * resultsPerPage;
   const firstIndex = lastIndex - resultsPerPage;
   const pagesNumber = calculatePageNumber(
@@ -57,9 +60,7 @@ const ListContainer = () => {
       </div>
     </div>
   ) : (
-    <div className="list-container">
-      <Loader />
-    </div>
+    <Loader />
   );
 };
 

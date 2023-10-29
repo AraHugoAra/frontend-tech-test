@@ -1,7 +1,12 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
+import useFirstRender from "./useFirstRender";
 
-const useFetch = (endpoint: string, params: {method?: string, body?: JSON | string} = {}, dependencies: Array<number | string> = []) => {
+const useFetch = (
+  endpoint: string,
+  params: { method?: string; body?: JSON | string } = {},
+  dependencies: Array<number | string> = []
+) => {
   /* 
     This hook encapsulates a fetch query and returns a loading state, errors caught and response of said query.
       Args:
@@ -13,9 +18,14 @@ const useFetch = (endpoint: string, params: {method?: string, body?: JSON | stri
           error (object): error caught in the try/catch statement
           data ({status: int, response: object}): status of the query and response of the server
    */
-  const [ data, setData ] = useState<{status: number, response: AxiosResponse} | null>(null);
-  const [ error, setError ] = useState<AxiosError | unknown>(null)
-  const [ loading, setLoading ] = useState<boolean>(true)
+  const [data, setData] = useState<{
+    status: number;
+    response: AxiosResponse;
+  } | null>(null);
+  const [error, setError] = useState<AxiosError | unknown>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const firstRender = useFirstRender();
 
   const APIBaseUrl = "http://gateway.marvel.com/v1/public";
   const APIKeyParameter = process.env.REACT_APP_MARVEL_API_KEY;
@@ -32,21 +42,22 @@ const useFetch = (endpoint: string, params: {method?: string, body?: JSON | stri
 
   useEffect(() => {
     const fetchData = async () => {
-        setLoading(true)
-        try {
-            const response = await axios(queryParams)
-            setData({status: response.status, response})
-            setLoading(false)
-        }
-        catch (error: AxiosError | unknown) {
-            setError(error)
-            setLoading(false)
-        }
-    }
-    fetchData()
+      setLoading(true);
+      try {
+        const response = await axios(queryParams);
+        setData({ status: response.status, response });
+        setLoading(false);
+      } catch (error: AxiosError | unknown) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    if (firstRender) {
+      setLoading(false);
+    } else fetchData();
   }, [...dependencies]);
 
-  return { data, loading, error}
+  return { data, loading, error };
 };
 
 export default useFetch;

@@ -2,15 +2,16 @@ import React, { createContext, useState } from "react";
 
 export type SearchBarContextStateType = {
   searchText: string;
-  setSearchText: React.Dispatch<React.SetStateAction<string>>
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
 };
 
 interface SearchBarProviderType {
   children: React.ReactNode;
-};
+}
 
 export const SearchBarContext: any = createContext<SearchBarContextStateType>({
-  searchText: "", setSearchText: () => {}
+  searchText: "",
+  setSearchText: () => {},
 });
 
 export function SearchBarContextProvider({ children }: SearchBarProviderType) {

@@ -7,14 +7,14 @@ const debounce = (cb: Function, delay = 250) => {
       Returns:
           Delayed function in a timeout
    */
-    let timeout: ReturnType<typeof setTimeout>
+  let timeout: ReturnType<typeof setTimeout>;
 
-    return (...args: Parameters<() => void>) => {
-        clearTimeout(timeout)
-        timeout = setTimeout(() => {
-            cb(...args)
-        }, delay)
-    }
-}
+  return (...args: Parameters<() => void>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      cb(...args);
+    }, delay);
+  };
+};
 
-export default debounce
+export default debounce;

@@ -2,10 +2,10 @@ import React from "react";
 import { CharacterType } from "../../api/types";
 
 interface CharacterCardPropsType {
-  character: CharacterType
+  character: CharacterType;
 }
 
-const CharacterCard = ({character}: CharacterCardPropsType) => (
+const CharacterCard = ({ character }: CharacterCardPropsType) => (
   <div className="character-card">
     <div className="character-card__image-container">
       <img

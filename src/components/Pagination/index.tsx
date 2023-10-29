@@ -5,12 +5,12 @@ import { mdiChevronRight } from "@mdi/js";
 import { mdiChevronLeft } from "@mdi/js";
 
 interface PaginationPropsType {
-  firstIndex: number
-  lastIndex: number
-  resultsPerPage: number
-  pagesNumber: number
-  currentPage: number
-  setCurrentPage: Function
+  firstIndex: number;
+  lastIndex: number;
+  resultsPerPage: number;
+  pagesNumber: number;
+  currentPage: number;
+  setCurrentPage: Function;
 }
 
 const Pagination = ({
@@ -35,28 +35,26 @@ const Pagination = ({
     currentPage !== number && setCurrentPage(number);
   };
 
-  const isFirstThreePages = firstIndex < (3 * resultsPerPage);
+  const isFirstThreePages = firstIndex < 3 * resultsPerPage;
   const isLastThreePages =
-    lastIndex > pagesNumber * resultsPerPage - (3 * resultsPerPage);
+    lastIndex > pagesNumber * resultsPerPage - 3 * resultsPerPage;
 
-    const numbersToDisplay = () => {
+  const numbersToDisplay = () => {
     if (isFirstThreePages) {
-      let numbersArray = []
-      for(let i=2; i<pagesNumber; i++){
-        numbersArray.length < 4 && numbersArray.push(i)
+      let numbersArray = [];
+      for (let i = 2; i < pagesNumber; i++) {
+        numbersArray.length < 4 && numbersArray.push(i);
       }
-      return numbersArray
-    }
-    else if (isLastThreePages) {
-      let numbersArray = []
-      for(let i=pagesNumber; i>1; i--){
-        i < pagesNumber && numbersArray.length < 4 && numbersArray.push(i)
+      return numbersArray;
+    } else if (isLastThreePages) {
+      let numbersArray = [];
+      for (let i = pagesNumber; i > 1; i--) {
+        i < pagesNumber && numbersArray.length < 4 && numbersArray.push(i);
       }
-      return numbersArray.reverse()
-    }
-    else return [currentPage -1, currentPage, currentPage +1]
-}
-  
+      return numbersArray.reverse();
+    } else return [currentPage - 1, currentPage, currentPage + 1];
+  };
+
   return (
     <ul className="pagination">
       <li className="pagination__button" onClick={handleClickPrev}>
@@ -67,18 +65,18 @@ const Pagination = ({
         value={1}
         onClick={() => handleClickNumber(1)}
       />
-      {!isFirstThreePages && pagesNumber > 6 &&  (
+      {!isFirstThreePages && pagesNumber > 6 && (
         <PaginationNumber isActive={false} value={"..."} onClick={null} />
       )}
       {numbersToDisplay().map((number) => {
         return (
-            <PaginationNumber
-              key={number}
-              isActive={number === currentPage}
-              value={number}
-              onClick={() => handleClickNumber(number)}
-            />
-        )
+          <PaginationNumber
+            key={number}
+            isActive={number === currentPage}
+            value={number}
+            onClick={() => handleClickNumber(number)}
+          />
+        );
       })}
       {!isLastThreePages && pagesNumber > 6 && (
         <PaginationNumber isActive={false} value={"..."} onClick={null} />

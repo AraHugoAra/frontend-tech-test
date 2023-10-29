@@ -1,6 +1,5 @@
 import React from "react";
 import Search from "../Search";
-//TO DO: use Marvel logo
 
 const Header = () => {
   return (
